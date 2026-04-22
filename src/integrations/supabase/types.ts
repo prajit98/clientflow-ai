@@ -14,16 +14,247 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      credit_transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          description: string | null
+          id: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      job_interactions: {
+        Row: {
+          created_at: string
+          event_type: string
+          id: string
+          job_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_type: string
+          id?: string
+          job_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_type?: string
+          id?: string
+          job_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_interactions_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      job_scores: {
+        Row: {
+          beginner_friendly: boolean | null
+          budget_score: number | null
+          clarity_score: number | null
+          id: string
+          job_id: string
+          opportunity_score: number | null
+          quality_score: number | null
+          reason_short: string | null
+          scored_at: string
+          spam_risk: number | null
+        }
+        Insert: {
+          beginner_friendly?: boolean | null
+          budget_score?: number | null
+          clarity_score?: number | null
+          id?: string
+          job_id: string
+          opportunity_score?: number | null
+          quality_score?: number | null
+          reason_short?: string | null
+          scored_at?: string
+          spam_risk?: number | null
+        }
+        Update: {
+          beginner_friendly?: boolean | null
+          budget_score?: number | null
+          clarity_score?: number | null
+          id?: string
+          job_id?: string
+          opportunity_score?: number | null
+          quality_score?: number | null
+          reason_short?: string | null
+          scored_at?: string
+          spam_risk?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_scores_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jobs: {
+        Row: {
+          budget_max: number | null
+          budget_min: number | null
+          canonical_url: string | null
+          country: string | null
+          created_at: string
+          currency: string | null
+          description_clean: string | null
+          freshness_hours: number | null
+          id: string
+          is_hourly: boolean | null
+          niche: string | null
+          posted_at: string | null
+          remote_type: string | null
+          source: string
+          source_job_id: string | null
+          status: string
+          title: string
+        }
+        Insert: {
+          budget_max?: number | null
+          budget_min?: number | null
+          canonical_url?: string | null
+          country?: string | null
+          created_at?: string
+          currency?: string | null
+          description_clean?: string | null
+          freshness_hours?: number | null
+          id?: string
+          is_hourly?: boolean | null
+          niche?: string | null
+          posted_at?: string | null
+          remote_type?: string | null
+          source: string
+          source_job_id?: string | null
+          status?: string
+          title: string
+        }
+        Update: {
+          budget_max?: number | null
+          budget_min?: number | null
+          canonical_url?: string | null
+          country?: string | null
+          created_at?: string
+          currency?: string | null
+          description_clean?: string | null
+          freshness_hours?: number | null
+          id?: string
+          is_hourly?: boolean | null
+          niche?: string | null
+          posted_at?: string | null
+          remote_type?: string | null
+          source?: string
+          source_job_id?: string | null
+          status?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          daily_job_limit: number
+          email: string
+          experience_level: string | null
+          full_name: string | null
+          id: string
+          niche: string | null
+          plan: string
+          proposal_credit_limit: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          daily_job_limit?: number
+          email: string
+          experience_level?: string | null
+          full_name?: string | null
+          id: string
+          niche?: string | null
+          plan?: string
+          proposal_credit_limit?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          daily_job_limit?: number
+          email?: string
+          experience_level?: string | null
+          full_name?: string | null
+          id?: string
+          niche?: string | null
+          plan?: string
+          proposal_credit_limit?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +381,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
