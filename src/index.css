@@ -8,35 +8,50 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* ClientFlow — light & airy SaaS (Linear/Notion vibe) */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 230 25% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 230 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 230 25% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 245 70% 58%;
+    --primary-foreground: 0 0% 100%;
+    --primary-soft: 245 95% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 230 20% 96%;
+    --secondary-foreground: 230 25% 18%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 230 20% 97%;
+    --muted-foreground: 230 12% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 268 80% 64%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --success: 152 65% 42%;
+    --warning: 38 92% 52%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 230 18% 92%;
+    --input: 230 18% 92%;
+    --ring: 245 70% 58%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    --gradient-hero: linear-gradient(135deg, hsl(245 90% 67%) 0%, hsl(268 85% 64%) 60%, hsl(295 75% 65%) 100%);
+    --gradient-soft: linear-gradient(180deg, hsl(245 95% 99%) 0%, hsl(0 0% 100%) 100%);
+    --gradient-mesh: radial-gradient(at 20% 10%, hsl(245 95% 95%) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(268 90% 95%) 0px, transparent 50%), radial-gradient(at 90% 80%, hsl(195 95% 94%) 0px, transparent 50%);
+
+    --shadow-sm: 0 1px 2px 0 hsl(230 25% 12% / 0.04);
+    --shadow-md: 0 4px 16px -4px hsl(230 25% 12% / 0.08);
+    --shadow-lg: 0 20px 40px -12px hsl(245 60% 30% / 0.18);
+    --shadow-glow: 0 0 0 1px hsl(245 70% 58% / 0.15), 0 10px 30px -8px hsl(245 70% 58% / 0.35);
+
+    --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
