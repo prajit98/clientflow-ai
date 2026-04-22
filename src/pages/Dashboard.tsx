@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/layout/AppShell";
@@ -52,23 +52,34 @@ export default function Dashboard() {
 
   return (
     <AppShell>
-      <div className="mb-8">
-        <h1 className="font-display text-3xl font-bold tracking-tight">
+      <div className="mb-6 md:mb-8">
+        <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">
           Hi {profile?.full_name?.split(" ")[0] || "there"} 👋
         </h1>
-        <p className="mt-1 text-muted-foreground">
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground md:text-base">
           {jobs?.length ?? 0} fresh opportunities scored just for you.
         </p>
       </div>
 
-      <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center">
+      <div className="mb-6 space-y-3 md:flex md:items-center md:gap-3 md:space-y-0">
         <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by keyword…" className="h-11 pl-10" />
+          <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Search by keyword…"
+            className="h-12 rounded-xl border-border/80 bg-card pl-11 shadow-soft-sm md:h-11 md:rounded-md md:bg-background md:shadow-none"
+          />
         </div>
-        <div className="flex gap-2">
+        <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0">
           {filters.map((f) => (
-            <Button key={f.id} variant={filter === f.id ? "default" : "outline"} size="sm" className="h-11 gap-2" onClick={() => setFilter(f.id)}>
+            <Button
+              key={f.id}
+              variant={filter === f.id ? "default" : "outline"}
+              size="sm"
+              className="h-11 shrink-0 rounded-xl px-4 text-sm shadow-soft-sm md:rounded-md md:shadow-none"
+              onClick={() => setFilter(f.id)}
+            >
               <f.icon className="h-4 w-4" /> {f.label}
             </Button>
           ))}
@@ -78,11 +89,11 @@ export default function Dashboard() {
       {isLoading ? (
         <div className="grid gap-4">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-32 animate-pulse rounded-2xl border border-border bg-card" />
+            <div key={i} className="h-40 animate-pulse rounded-2xl border border-border bg-card" />
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-border bg-card p-12 text-center">
+        <div className="rounded-2xl border border-dashed border-border bg-card p-8 text-center md:p-12">
           <p className="text-muted-foreground">No jobs match your filters.</p>
         </div>
       ) : (

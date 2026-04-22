@@ -26,7 +26,7 @@ export default function Account() {
   const [level, setLevel] = useState<string>("intermediate");
   const [saving, setSaving] = useState(false);
 
-  const { data: profile, refetch } = useQuery({
+  const { data: profile, refetch, isLoading } = useQuery({
     queryKey: ["profile", user?.id],
     enabled: !!user,
     queryFn: async () => {
@@ -54,10 +54,47 @@ export default function Account() {
     refetch();
   }
 
+  if (isLoading) {
+    return (
+      <AppShell>
+        <div className="space-y-6">
+          <div>
+            <div className="h-8 w-32 animate-pulse rounded bg-muted" />
+            <div className="mt-2 h-4 w-56 animate-pulse rounded bg-muted" />
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-[1fr_320px]">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-soft-sm md:p-8">
+              <div className="h-6 w-24 animate-pulse rounded bg-muted" />
+              <div className="mt-6 space-y-4">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="space-y-2">
+                    <div className="h-4 w-24 animate-pulse rounded bg-muted" />
+                    <div className="h-11 w-full animate-pulse rounded-xl bg-muted" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-soft-sm">
+              <div className="h-4 w-24 animate-pulse rounded bg-muted" />
+              <div className="mt-3 h-8 w-28 animate-pulse rounded bg-muted" />
+              <div className="mt-5 space-y-3">
+                <div className="h-4 w-full animate-pulse rounded bg-muted" />
+                <div className="h-4 w-4/5 animate-pulse rounded bg-muted" />
+                <div className="h-11 w-full animate-pulse rounded-xl bg-muted" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </AppShell>
+    );
+  }
+
   return (
     <AppShell>
-      <h1 className="font-display text-3xl font-bold tracking-tight">Account</h1>
-      <p className="mt-1 text-muted-foreground">Manage your profile, plan and credits.</p>
+      <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">Account</h1>
+      <p className="mt-2 text-sm leading-6 text-muted-foreground md:text-base">Manage your profile, plan and credits.</p>
 
       <div className="mt-8 grid gap-6 md:grid-cols-[1fr_320px]">
         <div className="rounded-2xl border border-border bg-card p-6 shadow-soft-sm md:p-8">
@@ -76,7 +113,7 @@ export default function Account() {
               <div className="flex flex-wrap gap-2">
                 {niches.map((n) => (
                   <button key={n} type="button" onClick={() => setNiche(n)}
-                    className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${niche === n ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground hover:text-foreground"}`}>
+                    className={`min-h-10 rounded-full px-4 py-2 text-sm font-medium transition-colors ${niche === n ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground hover:text-foreground"}`}>
                     {n}
                   </button>
                 ))}
@@ -84,16 +121,16 @@ export default function Account() {
             </div>
             <div className="space-y-1.5">
               <Label>Experience level</Label>
-              <div className="flex gap-2">
+              <div className="grid gap-2 sm:grid-cols-3">
                 {levels.map((l) => (
                   <button key={l} type="button" onClick={() => setLevel(l)}
-                    className={`flex-1 rounded-lg border px-3 py-2 text-sm font-medium capitalize transition-colors ${level === l ? "border-primary bg-primary-soft text-primary" : "border-border bg-card text-muted-foreground hover:text-foreground"}`}>
+                    className={`min-h-11 rounded-lg border px-4 py-2 text-sm font-medium capitalize transition-colors ${level === l ? "border-primary bg-primary-soft text-primary" : "border-border bg-card text-muted-foreground hover:text-foreground"}`}>
                     {l}
                   </button>
                 ))}
               </div>
             </div>
-            <Button onClick={save} disabled={saving} className="shadow-glow">{saving ? "Saving…" : "Save changes"}</Button>
+            <Button onClick={save} disabled={saving} className="h-11 w-full shadow-glow sm:w-auto">{saving ? "Saving…" : "Save changes"}</Button>
           </div>
         </div>
 

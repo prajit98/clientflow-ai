@@ -54,10 +54,10 @@ export default function Auth() {
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
-      <div className="flex flex-col justify-between p-8 md:p-12">
+      <div className="flex flex-col gap-10 p-6 sm:p-8 md:p-12 lg:justify-between">
         <Logo />
-        <div className="mx-auto w-full max-w-sm">
-          <h1 className="font-display text-3xl font-bold tracking-tight">
+        <div className="mx-auto w-full max-w-sm lg:flex-1 lg:flex lg:flex-col lg:justify-center">
+          <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
             {mode === "signup" ? "Start finding better clients" : "Welcome back"}
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -79,19 +79,19 @@ export default function Auth() {
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />
             </div>
-            <Button type="submit" className="h-11 w-full shadow-glow" disabled={loading}>
+            <Button type="submit" className="h-12 w-full shadow-glow" disabled={loading}>
               {loading ? "Please wait…" : mode === "signup" ? "Create account" : "Sign in"}
             </Button>
           </form>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             {mode === "signup" ? "Already have an account?" : "New to ClientFlow?"}{" "}
-            <button type="button" onClick={() => setMode(mode === "signup" ? "signin" : "signup")} className="font-semibold text-primary hover:underline">
+            <button type="button" onClick={() => setMode(mode === "signup" ? "signin" : "signup")} className="inline-flex min-h-10 items-center font-semibold text-primary hover:underline">
               {mode === "signup" ? "Sign in" : "Create one"}
             </button>
           </p>
         </div>
-        <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">← Back to home</Link>
+        <Link to="/" className="inline-flex min-h-10 items-center text-sm text-muted-foreground hover:text-foreground">← Back to home</Link>
       </div>
       <div className="relative hidden overflow-hidden bg-gradient-hero lg:block">
         <div className="absolute inset-0 bg-gradient-mesh opacity-30 mix-blend-overlay" />

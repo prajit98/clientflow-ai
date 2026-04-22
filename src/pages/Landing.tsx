@@ -42,7 +42,7 @@ export default function Landing() {
         <div className="absolute inset-0 -z-10 bg-gradient-mesh" />
         <div className="mx-auto max-w-6xl px-4 pb-24 pt-16 md:px-6 md:pt-24">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground shadow-soft-sm">
+            <span className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-center text-xs font-medium text-muted-foreground shadow-soft-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-success" />
               Now scoring 12,400+ fresh jobs every day
             </span>
@@ -56,10 +56,10 @@ export default function Landing() {
               You only see jobs worth your time.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button size="lg" asChild className="h-12 px-6 text-base shadow-glow">
+              <Button size="lg" asChild className="h-12 w-full px-6 text-base shadow-glow sm:w-auto">
                 <Link to="/auth?mode=signup">Start free — no card <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Button size="lg" variant="ghost" asChild className="h-12 px-6 text-base">
+              <Button size="lg" variant="ghost" asChild className="h-12 w-full px-6 text-base sm:w-auto">
                 <a href="#features">See how it works</a>
               </Button>
             </div>
@@ -138,6 +138,37 @@ export default function Landing() {
                 <Button className="mt-6 w-full" variant={p.featured ? "default" : "outline"} asChild>
                   <Link to="/auth?mode=signup">Get {p.name}</Link>
                 </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="border-t border-border py-24">
+        <div className="mx-auto max-w-4xl px-4 md:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">FAQ</h2>
+            <p className="mt-4 text-muted-foreground">A few quick answers for freelancers evaluating ClientFlow on the go.</p>
+          </div>
+
+          <div className="mt-12 grid gap-4">
+            {[
+              {
+                question: "How does ClientFlow decide which jobs are worth applying to?",
+                answer: "Each opportunity is scored for budget, clarity, and spam risk so the best-fit jobs rise to the top first.",
+              },
+              {
+                question: "Can I edit proposals before sending them?",
+                answer: "Yes. Generated proposals are meant to be quick first drafts that you can adjust before copying into your application.",
+              },
+              {
+                question: "Do I need a paid plan to get started?",
+                answer: "No. The free plan includes daily scored jobs and a limited number of proposal generations so you can try the workflow first.",
+              },
+            ].map((item) => (
+              <div key={item.question} className="rounded-2xl border border-border bg-card p-6 shadow-soft-sm">
+                <h3 className="font-display text-lg font-semibold leading-7">{item.question}</h3>
+                <p className="mt-2 text-sm leading-7 text-muted-foreground">{item.answer}</p>
               </div>
             ))}
           </div>

@@ -9,6 +9,7 @@ import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import JobDetail from "./pages/JobDetail";
+import Saved from "./pages/Saved";
 import Account from "./pages/Account";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/" element={<Landing />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+            <Route path="/saved" element={<RequireAuth><Saved /></RequireAuth>} />
             <Route path="/jobs/:id" element={<RequireAuth><JobDetail /></RequireAuth>} />
             <Route path="/account" element={<RequireAuth><Account /></RequireAuth>} />
             <Route path="/admin" element={<RequireAuth admin><Admin /></RequireAuth>} />
